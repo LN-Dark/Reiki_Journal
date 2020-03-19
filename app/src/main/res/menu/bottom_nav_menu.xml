@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/reiki_icon"
+        android:title="@string/diario_de_reiki" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/meditation_small"
+        android:title="@string/meditar" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_backup_black_24dp"
+        android:title="@string/backup" />
+
+</menu>

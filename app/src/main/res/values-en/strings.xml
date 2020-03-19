@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Reiki Journal</string>
+    <string name="meditar">Meditate</string>
+    <string name="diario_de_reiki">Reiki Journal</string>
+    <string name="backup">Backup</string>
+    <string name="novo">New</string>
+    <string name="come_ar">Start</string>
+    <string name="pausar">Pause</string>
+    <string name="recome_ar">Reset</string>
+    <string name="restore">Restore</string>
+    <string name="export_to_text_file">Export to text file</string>
+    <string name="textfilecreated">Text file created.</string>
+    <string name="thefilewillbeinspecificformat">The file will be created in a specific format.</string>
+    <string name="thefilewillbereadable">The file will be readable</string>
+    <string name="ok">Ok</string>
+    <string name="invalidfile">Invalid file</string>
+    <string name="doyouwanttomakebackup">Do you want to make a backup?</string>
+    <string name="doyouwanttoexport">Do you want export to text file?</string>
+    <string name="cancel">Cancel</string>
+    <string name="bacupcompleted">Backup completed.</string>
+    <string name="sessonofday">\" - Session of day \"</string>
+    <string name="program_clock_to_meditate">Program Clock to meditate</string>
+    <string name="resume">Resume</string>
+    <string name="escolher_musica">Choose music</string>
+    <string name="reproduzir">Play</string>
+    <string name="parar">Stop</string>
+    <string name="relogioprogramado">Clock scheduled</string>
+    <string name="jasaohorasdemeditar">It\'s time to meditate, don\'t forget the positive energy!</string>
+    <string name="notificacaodealarmeparanaoesquecermeditar">Alarm notification to not forget to meditate</string>
+</resources>

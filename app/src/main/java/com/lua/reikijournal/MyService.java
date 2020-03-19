@@ -51,48 +51,52 @@ public class MyService extends JobService {
         super.onCreate();
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE);
         String HorasClock = prefs.getString("ReikiJournal_Clock", "");
-        String[] clockDivided = HorasClock.split(":");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(clockDivided[0]));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(clockDivided[1]));
-        AlarmManager alarmMgr;
-        PendingIntent alarmIntent;
-        alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        if(!HorasClock.equals("")){
+            String[] clockDivided = HorasClock.split(":");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(clockDivided[0]));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(clockDivided[1]));
+            AlarmManager alarmMgr;
+            PendingIntent alarmIntent;
+            alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
             alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                     AlarmManager.INTERVAL_DAY, alarmIntent);
-        ComponentName receiver = new ComponentName(getApplicationContext(), DeviceBootReceiver.class);
-        PackageManager pm = getApplicationContext().getPackageManager();
+            ComponentName receiver = new ComponentName(getApplicationContext(), DeviceBootReceiver.class);
+            PackageManager pm = getApplicationContext().getPackageManager();
 
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
     }
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE);
         String HorasClock = prefs.getString("ReikiJournal_Clock", "");
-        String[] clockDivided = HorasClock.split(":");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(clockDivided[0]));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(clockDivided[1]));
-        AlarmManager alarmMgr;
-        PendingIntent alarmIntent;
-        alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        if(!HorasClock.equals("")){
+            String[] clockDivided = HorasClock.split(":");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(clockDivided[0]));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(clockDivided[1]));
+            AlarmManager alarmMgr;
+            PendingIntent alarmIntent;
+            alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
             alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                     AlarmManager.INTERVAL_DAY, alarmIntent);
-        ComponentName receiver = new ComponentName(getApplicationContext(), DeviceBootReceiver.class);
-        PackageManager pm = getApplicationContext().getPackageManager();
+            ComponentName receiver = new ComponentName(getApplicationContext(), DeviceBootReceiver.class);
+            PackageManager pm = getApplicationContext().getPackageManager();
 
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
         return true;
     }
 

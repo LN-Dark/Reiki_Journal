@@ -59,9 +59,11 @@ public class MeditarFragment extends Fragment {
         picker.setIs24HourView(true);
         SharedPreferences prefs = root.getContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE);
         String clockhourset = prefs.getString("ReikiJournal_Clock", "");
-        String[] clockhoursetDivided = clockhourset.split(":");
-        picker.setHour(Integer.parseInt(clockhoursetDivided[0]));
-        picker.setMinute(Integer.parseInt(clockhoursetDivided[1]));
+        if(!clockhourset.equals("")){
+            String[] clockhoursetDivided = clockhourset.split(":");
+            picker.setHour(Integer.parseInt(clockhoursetDivided[0]));
+            picker.setMinute(Integer.parseInt(clockhoursetDivided[1]));
+        }
         MaterialButton btnProgramarRelogio = root.findViewById(R.id.btnprogramclock);
         MaterialButton btnReset = root.findViewById(R.id.btnReset_timer);
         MaterialButton btnEscolherMusica = root.findViewById(R.id.btnEscolher_musica);

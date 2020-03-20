@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.IBinder;
+import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
@@ -19,36 +20,30 @@ import androidx.core.app.JobIntentService;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MyService extends JobService {
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE);
-        String HorasClock = prefs.getString("ReikiJournal_Clock", "");
-        String[] clockDivided = HorasClock.split(":");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(clockDivided[0]));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(clockDivided[1]));
-        AlarmManager alarmMgr;
-        PendingIntent alarmIntent;
-        alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        Intent intent1 = new Intent(getApplicationContext(), AlarmReceiver.class);
-        alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent1, 0);
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, alarmIntent);
-        return super.onStartCommand(intent, flags, startId);
+public class MyService extends Service {
+    public MyService() {
     }
 
     @Override
-    public void onDestroy() {
-
-        super.onDestroy();
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        startAlarm(true,true);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_NOT_STICKY;
+    }
+
+    private void startAlarm(boolean isNotification, boolean isRepeat) {
+        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent myIntent;
+        PendingIntent pendingIntent;
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE);
         String HorasClock = prefs.getString("ReikiJournal_Clock", "");
         if(!HorasClock.equals("")){
@@ -57,51 +52,9 @@ public class MyService extends JobService {
             calendar.setTimeInMillis(System.currentTimeMillis());
             calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(clockDivided[0]));
             calendar.set(Calendar.MINUTE, Integer.parseInt(clockDivided[1]));
-            AlarmManager alarmMgr;
-            PendingIntent alarmIntent;
-            alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                    AlarmManager.INTERVAL_DAY, alarmIntent);
-            ComponentName receiver = new ComponentName(getApplicationContext(), DeviceBootReceiver.class);
-            PackageManager pm = getApplicationContext().getPackageManager();
-
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    PackageManager.DONT_KILL_APP);
+            myIntent = new Intent(this, AlarmReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
+            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
         }
-    }
-
-    @Override
-    public boolean onStartJob(JobParameters jobParameters) {
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE);
-        String HorasClock = prefs.getString("ReikiJournal_Clock", "");
-        if(!HorasClock.equals("")){
-            String[] clockDivided = HorasClock.split(":");
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(clockDivided[0]));
-            calendar.set(Calendar.MINUTE, Integer.parseInt(clockDivided[1]));
-            AlarmManager alarmMgr;
-            PendingIntent alarmIntent;
-            alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                    AlarmManager.INTERVAL_DAY, alarmIntent);
-            ComponentName receiver = new ComponentName(getApplicationContext(), DeviceBootReceiver.class);
-            PackageManager pm = getApplicationContext().getPackageManager();
-
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    PackageManager.DONT_KILL_APP);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onStopJob(JobParameters jobParameters) {
-        return true;
     }
 }

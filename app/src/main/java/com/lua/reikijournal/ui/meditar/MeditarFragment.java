@@ -94,13 +94,12 @@ public class MeditarFragment extends Fragment {
             calendar.setTimeInMillis(System.currentTimeMillis());
             calendar.set(Calendar.HOUR_OF_DAY, hour);
             calendar.set(Calendar.MINUTE, minute);
-            AlarmManager alarmMgr;
-            PendingIntent alarmIntent;
-            alarmMgr = (AlarmManager)root.getContext().getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(root.getContext(), AlarmReceiver.class);
-            alarmIntent = PendingIntent.getBroadcast(root.getContext(), 0, intent, 0);
-            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                    AlarmManager.INTERVAL_DAY, alarmIntent);
+            AlarmManager manager = (AlarmManager)root.getContext().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+            Intent myIntent;
+            PendingIntent pendingIntent;
+            myIntent = new Intent(root.getContext().getApplicationContext(), AlarmReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(root.getContext().getApplicationContext(),0,myIntent,0);
+            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
             ComponentName receiver = new ComponentName(root.getContext(), DeviceBootReceiver.class);
             PackageManager pm = root.getContext().getPackageManager();
             pm.setComponentEnabledSetting(receiver,
@@ -126,7 +125,6 @@ public class MeditarFragment extends Fragment {
         btnStart.setOnClickListener(v -> {
             btnStart.setEnabled(false);
             btnStop.setEnabled(true);
-
             if (!resume) {
                 cmTimer.setBase(SystemClock.elapsedRealtime());
                 cmTimer.start();
@@ -152,7 +150,6 @@ public class MeditarFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if(resultCode == RESULT_OK && requestCode == 10){
             uriSound=data.getData();
             play(root.getContext(), uriSound);
@@ -166,8 +163,7 @@ public class MeditarFragment extends Fragment {
             mp.setOnPreparedListener(mediaPlayer -> mediaPlayer.start());
             mp.prepareAsync();
         } catch (IllegalArgumentException | SecurityException | IllegalStateException e) {
-            e.printStackTrace();
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-
 }

@@ -32,7 +32,7 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        startAlarm(true,true);
+        startAlarm();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MyService extends Service {
         return START_NOT_STICKY;
     }
 
-    private void startAlarm(boolean isNotification, boolean isRepeat) {
+    private void startAlarm() {
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent myIntent;
         PendingIntent pendingIntent;

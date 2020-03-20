@@ -25,6 +25,14 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package" />
+            </intent-filter>
         </receiver>
         <receiver android:name="com.lua.reikijournal.AlarmReceiver" />
         <activity
@@ -36,5 +44,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

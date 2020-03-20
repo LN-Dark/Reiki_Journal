@@ -13,7 +13,7 @@
     <string name="textfilecreated">Text file created.</string>
     <string name="thefilewillbeinspecificformat">The file will be created in a specific format.</string>
     <string name="thefilewillbereadable">The file will be readable</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="invalidfile">Invalid file</string>
     <string name="doyouwanttomakebackup">Do you want to make a backup?</string>
     <string name="doyouwanttoexport">Do you want export to text file?</string>
@@ -28,4 +28,5 @@
     <string name="relogioprogramado">Clock scheduled</string>
     <string name="jasaohorasdemeditar">It\'s time to meditate, don\'t forget the positive energy!</string>
     <string name="notificacaodealarmeparanaoesquecermeditar">Alarm notification to not forget to meditate</string>
+    <string name="settings">Settings</string>
 </resources>

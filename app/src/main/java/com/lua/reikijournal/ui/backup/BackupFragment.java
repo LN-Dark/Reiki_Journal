@@ -2,7 +2,9 @@ package com.lua.reikijournal.ui.backup;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +48,42 @@ public class BackupFragment extends Fragment {
         MaterialButton btn_backupFicheiro = root.findViewById(R.id.btn_backup_ficheiro);
         MaterialButton btn_restoreFromFile = root.findViewById(R.id.btn_restore_ficheiro);
         MaterialButton btn_ficheiroReadable = root.findViewById(R.id.btn_Backup_ficheiro_Readable);
+        ImageView btn_telegram = root.findViewById(R.id.btn_telegram);
+       ImageView btn_paypal = root.findViewById(R.id.btn_paypal);
+       ImageView btn_github = root.findViewById(R.id.btn_github);
+       btn_github.setOnClickListener(v -> {
+           Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/LN-Dark"));
+           startActivity(browserIntent);
+       });
+        btn_telegram.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/LN_DarK"));
+            startActivity(browserIntent);
+        });
+       btn_paypal.setOnClickListener(v -> {
+           MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(root.getContext());
+           LinearLayout layout = new LinearLayout(root.getContext());
+           layout.setOrientation(LinearLayout.VERTICAL);
+           builder.setIcon(root.getContext().getDrawable(R.drawable.reiki_icon));
+           builder.setTitle("Donate");
+           layout.setGravity(Gravity.CENTER);
+           final TextView espaco4 = new TextView(root.getContext());
+           espaco4.setText("\n\nThanks for your donation :D");
+           espaco4.setTextSize(19);
+           espaco4.setGravity(Gravity.CENTER);
+           layout.addView(espaco4);
+           final TextView espaco2 = new TextView(root.getContext());
+           espaco2.setText("\n");
+           espaco2.setTextSize(25);
+           espaco2.setGravity(Gravity.CENTER);
+           layout.addView(espaco2);
+           builder.setView(layout);
+           builder.setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+               Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://paypal.me/pedrocruz77"));
+               startActivity(browserIntent);
+           });
+           builder.setNeutralButton(getString(R.string.cancel), (dialog, which) -> dialog.dismiss());
+           builder.show();
+       });
         btn_ficheiroReadable.setOnClickListener(v -> {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(root.getContext());
             LinearLayout layout = new LinearLayout(root.getContext());

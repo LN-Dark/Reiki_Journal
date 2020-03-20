@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_backup_black_24dp"
-        android:title="@string/backup" />
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/settings" />
 
 </menu>

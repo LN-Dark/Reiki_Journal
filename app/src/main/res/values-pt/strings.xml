@@ -13,7 +13,7 @@
     <string name="thefilewillbereadable">O ficheiro da para ler</string>
     <string name="thefilewillbeinspecificformat">O ficheiro vai ser criado numa forma especifica</string>
     <string name="textfilecreated">Ficheiro de texto criado.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="invalidfile">Ficheiro invalido</string>
     <string name="sessonofday">\" - Sessao do dia \"</string>
     <string name="bacupcompleted">Copia de segurança completa</string>
@@ -28,4 +28,5 @@
     <string name="relogioprogramado">Relogio programado</string>
     <string name="notificacaodealarmeparanaoesquecermeditar">Notificaçao de alarme para nao esquecer de meditar</string>
     <string name="jasaohorasdemeditar">Ja sao horas de meditar, nao te esquecas da energia positiva!</string>
+    <string name="settings">Defeniçoes</string>
 </resources>

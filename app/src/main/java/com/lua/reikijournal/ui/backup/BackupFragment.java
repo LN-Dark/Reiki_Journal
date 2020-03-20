@@ -51,10 +51,15 @@ public class BackupFragment extends Fragment {
         ImageView btn_telegram = root.findViewById(R.id.btn_telegram);
        ImageView btn_paypal = root.findViewById(R.id.btn_paypal);
        ImageView btn_github = root.findViewById(R.id.btn_github);
-       btn_github.setOnClickListener(v -> {
-           Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/LN-Dark"));
+        ImageView btn_associacaoreiki = root.findViewById(R.id.btn_associacaoreiki);
+        btn_associacaoreiki.setOnClickListener(v -> {
+           Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.associacaoportuguesadereiki.com/"));
            startActivity(browserIntent);
        });
+        btn_github.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/LN-Dark"));
+            startActivity(browserIntent);
+        });
         btn_telegram.setOnClickListener(v -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/LN_DarK"));
             startActivity(browserIntent);

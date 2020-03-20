@@ -69,10 +69,10 @@ public class BackupFragment extends Fragment {
            LinearLayout layout = new LinearLayout(root.getContext());
            layout.setOrientation(LinearLayout.VERTICAL);
            builder.setIcon(root.getContext().getDrawable(R.drawable.reiki_icon));
-           builder.setTitle("Donate");
+           builder.setTitle(getString(R.string.doar));
            layout.setGravity(Gravity.CENTER);
            final TextView espaco4 = new TextView(root.getContext());
-           espaco4.setText("\n\nThanks for your donation :D");
+           espaco4.setText(getString(R.string.obrigadopeladoacao));
            espaco4.setTextSize(19);
            espaco4.setGravity(Gravity.CENTER);
            layout.addView(espaco4);

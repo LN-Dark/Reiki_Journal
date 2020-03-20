@@ -29,4 +29,6 @@
     <string name="jasaohorasdemeditar">It\'s time to meditate, don\'t forget the positive energy!</string>
     <string name="notificacaodealarmeparanaoesquecermeditar">Alarm notification to not forget to meditate</string>
     <string name="settings">Settings</string>
+    <string name="obrigadopeladoacao">\n\nThanks for your donation :D</string>
+    <string name="doar">Donate</string>
 </resources>

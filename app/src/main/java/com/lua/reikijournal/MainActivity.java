@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getSupportFragmentManager()
                     .beginTransaction()
                     .addToBackStack(null)
-                    .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                    .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
                     .replace(R.id.fragment_container, fragment)
                     .commit();
             return true;
@@ -67,12 +67,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 fragment = new HomeFragment();
+                getSupportActionBar().setTitle(getString(R.string.diario_de_reiki));
                 break;
             case R.id.navigation_dashboard:
                 fragment = new MeditarFragment();
+                getSupportActionBar().setTitle(getString(R.string.meditar));
                 break;
             case R.id.navigation_notifications:
                 fragment = new BackupFragment();
+                getSupportActionBar().setTitle(getString(R.string.settings));
                 break;
         }
         return loadFragment(fragment);

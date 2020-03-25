@@ -20,7 +20,7 @@
     <string name="cancel">Cancel</string>
     <string name="bacupcompleted">Backup completed.</string>
     <string name="sessonofday">\" - Session of day \"</string>
-    <string name="program_clock_to_meditate">Program Clock to meditate</string>
+    <string name="program_clock_to_meditate">Program Notification to meditate</string>
     <string name="resume">Resume</string>
     <string name="escolher_musica">Choose music</string>
     <string name="reproduzir">Play</string>
@@ -31,4 +31,7 @@
     <string name="settings">Settings</string>
     <string name="obrigadopeladoacao">\n\nThanks for your donation :D</string>
     <string name="doar">Donate</string>
+    <string name="escolheahora">Choose the time</string>
+    <string name="cronometro">Stopwatch</string>
+    <string name="leitor_musica">Music Player</string>
 </resources>

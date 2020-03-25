@@ -16,18 +16,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.lua.reikijournal.AlarmReceiver;
 import com.lua.reikijournal.DeviceBootReceiver;
 import com.lua.reikijournal.MainActivity;
@@ -48,6 +53,7 @@ public class MeditarFragment extends Fragment {
     private Boolean resume = false;
     private long elapsedTime;
     private View root;
+    private static final String DIALOG_TIME = "MainActivity.TimeDialog";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,15 +61,6 @@ public class MeditarFragment extends Fragment {
         cmTimer = root.findViewById(R.id.cmTimer);
         btnStart = root.findViewById(R.id.btnStart_timer);
         btnStop = root.findViewById(R.id.btnStop_timer);
-        TimePicker picker= root.findViewById(R.id.datePicker1);
-        picker.setIs24HourView(true);
-        SharedPreferences prefs = root.getContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE);
-        String clockhourset = prefs.getString("ReikiJournal_Clock", "");
-        if(!clockhourset.equals("")){
-            String[] clockhoursetDivided = clockhourset.split(":");
-            picker.setHour(Integer.parseInt(clockhoursetDivided[0]));
-            picker.setMinute(Integer.parseInt(clockhoursetDivided[1]));
-        }
         MaterialButton btnProgramarRelogio = root.findViewById(R.id.btnprogramclock);
         MaterialButton btnReset = root.findViewById(R.id.btnReset_timer);
         MaterialButton btnEscolherMusica = root.findViewById(R.id.btnEscolher_musica);
@@ -87,36 +84,8 @@ public class MeditarFragment extends Fragment {
             startActivityForResult(intent, 10);
         });
         btnProgramarRelogio.setOnClickListener(v -> {
-            int hour, minute;
-            hour = picker.getHour();
-            minute = picker.getMinute();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.HOUR_OF_DAY, hour);
-            calendar.set(Calendar.MINUTE, minute);
-            AlarmManager manager = (AlarmManager)root.getContext().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-            Intent myIntent;
-            PendingIntent pendingIntent;
-            myIntent = new Intent(root.getContext().getApplicationContext(), AlarmReceiver.class);
-            pendingIntent = PendingIntent.getBroadcast(root.getContext().getApplicationContext(),0,myIntent,0);
-            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
-            ComponentName receiver = new ComponentName(root.getContext(), DeviceBootReceiver.class);
-            PackageManager pm = root.getContext().getPackageManager();
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    PackageManager.DONT_KILL_APP);
-            SharedPreferences.Editor editor = root.getContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE).edit();
-            editor.putString("ReikiJournal_Clock", hour + ":" + minute);
-            editor.putString("ReikiJournal_Clock_dayClock", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
-            editor.putString("ReikiJournal_Clock_monthClock", String.valueOf(calendar.get(Calendar.MONTH)));
-            editor.putString("ReikiJournal_Clock_yearClock", String.valueOf(calendar.get(Calendar.YEAR)));
-            editor.apply();
-            JobScheduler jobScheduler = (JobScheduler) getActivity().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-            JobInfo jobInfo = new JobInfo.Builder(11, new ComponentName(root.getContext(), MyService.class))
-                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                    .build();
-            jobScheduler.schedule(jobInfo);
-            Toast.makeText(getContext(), getString(R.string.relogioprogramado), Toast.LENGTH_LONG).show();
+            TimePickerFragment dialog = new TimePickerFragment();
+            dialog.show(getActivity().getSupportFragmentManager(), "");
         });
 
         cmTimer.setOnChronometerTickListener(arg0 -> {
@@ -170,4 +139,5 @@ public class MeditarFragment extends Fragment {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+
 }

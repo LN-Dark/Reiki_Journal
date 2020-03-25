@@ -37,6 +37,7 @@
         <receiver android:name="com.lua.reikijournal.AlarmReceiver" />
         <activity
             android:name="com.lua.reikijournal.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -21,7 +21,7 @@
     <string name="doyouwanttoexport">Quer exportar para ficheiro de texto?</string>
     <string name="doyouwanttomakebackup">Quer fazer uma copia de segurança?</string>
     <string name="resume">Continuar</string>
-    <string name="program_clock_to_meditate">Programar relogio para meditar</string>
+    <string name="program_clock_to_meditate">Programar notificaçao para meditar</string>
     <string name="escolher_musica">Escolher musica</string>
     <string name="reproduzir">Reproduzir</string>
     <string name="parar">Parar</string>
@@ -31,4 +31,7 @@
     <string name="settings">Defeniçoes</string>
     <string name="obrigadopeladoacao">\n\nObrigado pela doaçao :D</string>
     <string name="doar">Doar</string>
+    <string name="escolheahora">Escolhe a hora</string>
+    <string name="cronometro">Cronometro</string>
+    <string name="leitor_musica">Leitor musica</string>
 </resources>

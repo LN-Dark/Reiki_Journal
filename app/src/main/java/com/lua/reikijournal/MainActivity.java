@@ -29,8 +29,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         loadFragment(new HomeFragment());
         BottomNavigationView navigation = findViewById(R.id.nav_view);
         navigation.setOnNavigationItemSelectedListener(this);
-        Intent i = new Intent(this,MyService.class);
-        this.startService(i);
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        JobInfo jobInfo = new JobInfo.Builder(11, new ComponentName(getContextOfApplication(), MyService.class))
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                .build();
+        jobScheduler.schedule(jobInfo);
     }
 
     public static Context contextOfApplication;

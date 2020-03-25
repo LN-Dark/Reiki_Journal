@@ -106,15 +106,19 @@ public class MeditarFragment extends Fragment {
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                     PackageManager.DONT_KILL_APP);
             SharedPreferences.Editor editor = root.getContext().getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE).edit();
-                editor.putString("ReikiJournal_Clock", hour + ":" + minute);
-                editor.apply();
-                    JobScheduler jobScheduler = (JobScheduler) getActivity().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-                    JobInfo jobInfo = new JobInfo.Builder(11, new ComponentName(root.getContext(), MyService.class))
-                            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                            .build();
-                    jobScheduler.schedule(jobInfo);
-                Toast.makeText(getContext(), getString(R.string.relogioprogramado), Toast.LENGTH_LONG).show();
+            editor.putString("ReikiJournal_Clock", hour + ":" + minute);
+            editor.putString("ReikiJournal_Clock_dayClock", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+            editor.putString("ReikiJournal_Clock_monthClock", String.valueOf(calendar.get(Calendar.MONTH)));
+            editor.putString("ReikiJournal_Clock_yearClock", String.valueOf(calendar.get(Calendar.YEAR)));
+            editor.apply();
+            JobScheduler jobScheduler = (JobScheduler) getActivity().getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            JobInfo jobInfo = new JobInfo.Builder(11, new ComponentName(root.getContext(), MyService.class))
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                    .build();
+            jobScheduler.schedule(jobInfo);
+            Toast.makeText(getContext(), getString(R.string.relogioprogramado), Toast.LENGTH_LONG).show();
         });
+
         cmTimer.setOnChronometerTickListener(arg0 -> {
             if (!resume) {
                 elapsedTime = SystemClock.elapsedRealtime();

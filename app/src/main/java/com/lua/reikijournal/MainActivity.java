@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                 .build();
         jobScheduler.schedule(jobInfo);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(getDrawable(R.drawable.reiki_icon_toolbar));
     }
 
     public static Context contextOfApplication;

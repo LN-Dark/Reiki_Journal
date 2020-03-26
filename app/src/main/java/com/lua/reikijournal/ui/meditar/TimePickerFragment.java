@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -30,11 +31,9 @@ import java.util.Calendar;
 import static android.content.Context.MODE_PRIVATE;
 
 public class TimePickerFragment extends DialogFragment {
-
     private TimePicker timePicker;
-    public interface TimeDialogListener {
-        void onFinishDialog(String time);
-    }
+
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         View v = LayoutInflater.from(getActivity())
@@ -61,7 +60,7 @@ public class TimePickerFragment extends DialogFragment {
                 .create();
     }
 
-    private String updateTime(int hours, int mins) {
+    private void updateTime(int hours, int mins) {
         int hour, minute;
         hour = hours;
         minute = mins;
@@ -74,7 +73,7 @@ public class TimePickerFragment extends DialogFragment {
         PendingIntent pendingIntent;
         myIntent = new Intent(getContext().getApplicationContext(), AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getContext().getApplicationContext(),0,myIntent,0);
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
+        manager.setAlarmClock(new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), pendingIntent), pendingIntent);
         ComponentName receiver = new ComponentName(getContext(), DeviceBootReceiver.class);
         PackageManager pm = getContext().getPackageManager();
         pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
@@ -90,7 +89,5 @@ public class TimePickerFragment extends DialogFragment {
                 .build();
         jobScheduler.schedule(jobInfo);
         Toast.makeText(getContext(), getString(R.string.relogioprogramado), Toast.LENGTH_LONG).show();
-
-        return "true";
     }
 }

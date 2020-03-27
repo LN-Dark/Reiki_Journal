@@ -53,7 +53,8 @@ public class MeditarFragment extends Fragment {
     private Boolean resume = false;
     private long elapsedTime;
     private View root;
-    private static final String DIALOG_TIME = "MainActivity.TimeDialog";
+    private MaterialButton btnStartMusica;
+    private MaterialButton btnStopMusica;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,19 +65,28 @@ public class MeditarFragment extends Fragment {
         MaterialButton btnProgramarRelogio = root.findViewById(R.id.btnprogramclock);
         MaterialButton btnReset = root.findViewById(R.id.btnReset_timer);
         MaterialButton btnEscolherMusica = root.findViewById(R.id.btnEscolher_musica);
-        MaterialButton btnStartMusica = root.findViewById(R.id.btnStart_Musica);
-        MaterialButton btnStopMusica = root.findViewById(R.id.btnStop_Musica);
+         btnStartMusica = root.findViewById(R.id.btnStart_Musica);
+         btnStopMusica = root.findViewById(R.id.btnStop_Musica);
+        btnStopMusica.setEnabled(false);
+        btnStartMusica.setEnabled(false);
+        btnStart.setEnabled(true);
+        btnStop.setEnabled(false);
+        btnReset.setEnabled(false);
         btnStartMusica.setOnClickListener(v -> {
             if(uriSound.equals(Uri.EMPTY)){
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 10);
             }else {
                 play(root.getContext().getApplicationContext(), uriSound);
+                btnStopMusica.setEnabled(true);
+                btnStartMusica.setEnabled(false);
             }
         });
         btnStopMusica.setOnClickListener(v -> {
             if(mp.isPlaying()){
                 mp.stop();
+                btnStopMusica.setEnabled(false);
+                btnStartMusica.setEnabled(false);
             }
         });
         btnEscolherMusica.setOnClickListener(v -> {
@@ -125,7 +135,8 @@ public class MeditarFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK && requestCode == 10){
             uriSound=data.getData();
-            play(root.getContext(), uriSound);
+            btnStartMusica.setEnabled(true);
+            //play(root.getContext(), uriSound);
         }
     }
     private Uri uriSound;

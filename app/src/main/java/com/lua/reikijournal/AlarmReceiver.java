@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -15,6 +16,10 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import java.util.Calendar;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
@@ -55,7 +60,12 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setAutoCancel(true);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context.getApplicationContext());
         notificationManager.notify(reqCode, builder.build());
-
-
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        SharedPreferences.Editor editor = context.getSharedPreferences("ReikiJournal_Clock", MODE_PRIVATE).edit();
+        editor.putString("ReikiJournal_Clock_dayClock", String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+        editor.putString("ReikiJournal_Clock_monthClock", String.valueOf(calendar.get(Calendar.MONTH)));
+        editor.putString("ReikiJournal_Clock_yearClock", String.valueOf(calendar.get(Calendar.YEAR)));
+        editor.apply();
     }
 }

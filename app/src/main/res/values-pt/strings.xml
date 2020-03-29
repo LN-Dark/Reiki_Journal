@@ -4,7 +4,7 @@
     <string name="diario_de_reiki">Diario de Reiki</string>
     <string name="meditar">Meditar</string>
     <string name="backup">Copia de segurança</string>
-    <string name="novo">Novo</string>
+    <string name="novo">Nova Sessao</string>
     <string name="come_ar">Começar</string>
     <string name="pausar">Pausar</string>
     <string name="recome_ar">Recomeçar</string>
@@ -34,4 +34,10 @@
     <string name="escolheahora">Escolhe a hora</string>
     <string name="cronometro">Cronometro</string>
     <string name="leitor_musica">Leitor musica</string>
+    <string name="meditationtime">Tempo em meditaçao</string>
+    <string name="sessaogravadacomsucesso">Sessao de Reiki gravada com sucesso.</string>
+    <string name="escreveaobservacao">Escreve a observaçao</string>
+    <string name="escolheadata">Escolhe a data da sessao</string>
+    <string name="escolheradata">Escolher data</string>
+    <string name="reikijournalmeditationnotification">Reiki Journal - Notificaçao de meditaçao</string>
 </resources>

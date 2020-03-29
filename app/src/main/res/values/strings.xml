@@ -3,7 +3,7 @@
     <string name="diario_de_reiki">Reiki Journal</string>
     <string name="meditar">Meditate</string>
     <string name="backup">Backup</string>
-    <string name="novo">New</string>
+    <string name="novo">New session</string>
     <string name="come_ar">Start</string>
     <string name="pausar">Pause</string>
     <string name="recome_ar">Reset</string>
@@ -33,4 +33,10 @@
     <string name="escolheahora">Choose the time</string>
     <string name="cronometro">Stopwatch</string>
     <string name="leitor_musica">Music Player</string>
+    <string name="meditationtime">Meditation time</string>
+    <string name="sessaogravadacomsucesso">Reiki session saved</string>
+    <string name="escreveaobservacao">Write an observation</string>
+    <string name="escolheadata">Choose session date</string>
+    <string name="escolheradata">Choose Date</string>
+    <string name="reikijournalmeditationnotification">Reiki Journal - Meditate notification</string>
 </resources>

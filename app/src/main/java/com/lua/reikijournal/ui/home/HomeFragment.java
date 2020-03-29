@@ -35,8 +35,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_reiki, container, false);
-        ExtendedFloatingActionButton floatingActionButton = root.findViewById(R.id.float_addSonhos);
-        floatingActionButton.setOnClickListener(v -> ((MainActivity)getActivity()).loadFragment(new NovoReikiFragment()));
         SharedPreferences prefs = root.getContext().getSharedPreferences("ReikiJournal", MODE_PRIVATE);
         String SonhosFull = prefs.getString("ReikiJournal", "");
         String[] SonhosDivided = SonhosFull.split("§");

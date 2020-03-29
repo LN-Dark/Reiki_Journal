@@ -1,10 +1,8 @@
-package com.lua.reikijournal.ui.backup;
+package com.lua.reikijournal.ui.settings;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -28,6 +26,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.lua.reikijournal.MainActivity;
 import com.lua.reikijournal.R;
 import com.lua.reikijournal.ui.home.ReikiObject;
+import com.lua.reikijournal.ui.home.TimePickerFragment;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,12 +38,12 @@ import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class BackupFragment extends Fragment {
+public class SettingsFragment extends Fragment {
     private View root;
     public static int PICK_FILE = 1;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_backup, container, false);
+        root = inflater.inflate(R.layout.fragment_settings, container, false);
         MaterialButton btn_backupFicheiro = root.findViewById(R.id.btn_backup_ficheiro);
         MaterialButton btn_restoreFromFile = root.findViewById(R.id.btn_restore_ficheiro);
         MaterialButton btn_ficheiroReadable = root.findViewById(R.id.btn_Backup_ficheiro_Readable);
@@ -52,6 +51,11 @@ public class BackupFragment extends Fragment {
        ImageView btn_paypal = root.findViewById(R.id.btn_paypal);
        ImageView btn_github = root.findViewById(R.id.btn_github);
         ImageView btn_associacaoreiki = root.findViewById(R.id.btn_associacaoreiki);
+        MaterialButton btnProgramarRelogio = root.findViewById(R.id.btnprogramclock);
+        btnProgramarRelogio.setOnClickListener(v -> {
+            TimePickerFragment dialog = new TimePickerFragment();
+            dialog.show(getActivity().getSupportFragmentManager(), "");
+        });
         btn_associacaoreiki.setOnClickListener(v -> {
            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.associacaoportuguesadereiki.com/"));
            startActivity(browserIntent);
@@ -229,13 +233,13 @@ public class BackupFragment extends Fragment {
                         editor.putString("ReikiJournal", SonhosFull + "§" + fileContent);
                         editor.apply();
                     }catch (Exception e){
-                        Toast.makeText(BackupFragment.this.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(SettingsFragment.this.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }else {
-                    Toast.makeText(BackupFragment.this.getContext(),getString( R.string.invalidfile), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SettingsFragment.this.getContext(),getString( R.string.invalidfile), Toast.LENGTH_LONG).show();
                 }
             }else {
-                Toast.makeText(BackupFragment.this.getContext(), getString( R.string.invalidfile), Toast.LENGTH_LONG).show();
+                Toast.makeText(SettingsFragment.this.getContext(), getString( R.string.invalidfile), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -253,7 +257,7 @@ public class BackupFragment extends Fragment {
                 bw.write(SonhosFull);
                 bw.flush();
                 bw.close();
-                Toast.makeText(BackupFragment.this.getContext(), getString(R.string.bacupcompleted), Toast.LENGTH_LONG).show();
+                Toast.makeText(SettingsFragment.this.getContext(), getString(R.string.bacupcompleted), Toast.LENGTH_LONG).show();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -287,7 +291,7 @@ public class BackupFragment extends Fragment {
                 bw.write(filetoSaveString);
                 bw.flush();
                 bw.close();
-                Toast.makeText(BackupFragment.this.getContext(), getString(R.string.textfilecreated), Toast.LENGTH_LONG).show();
+                Toast.makeText(SettingsFragment.this.getContext(), getString(R.string.textfilecreated), Toast.LENGTH_LONG).show();
             }
         } catch (IOException e) {
             e.printStackTrace();

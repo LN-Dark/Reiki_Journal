@@ -1,4 +1,4 @@
-package com.lua.reikijournal.ui.meditar;
+package com.lua.reikijournal.ui.home;
 
 import android.app.AlarmManager;
 import android.app.Dialog;
@@ -46,16 +46,13 @@ public class TimePickerFragment extends DialogFragment {
                 .setTitle(getString(R.string.escolheahora))
                 .setIcon(getContext().getDrawable(R.drawable.reiki_icon))
                 .setPositiveButton(android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                int hour = 0;
-                                hour = timePicker.getHour();
-                                int minute = 0;
-                                minute = timePicker.getMinute();
-                                updateTime(hour, minute);
-                                dismiss();
-                            }
+                        (dialog, which) -> {
+                            int hour = 0;
+                            hour = timePicker.getHour();
+                            int minute = 0;
+                            minute = timePicker.getMinute();
+                            updateTime(hour, minute);
+                            dismiss();
                         })
                 .create();
     }

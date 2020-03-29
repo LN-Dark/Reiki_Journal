@@ -31,7 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     public void showNotification(Context context, String title, String message, Intent intent, int reqCode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "ReikiJournal_channel";;
+            CharSequence name = context.getString(R.string.reikijournalmeditationnotification);;
             String description = context.getString(R.string.notificacaodealarmeparanaoesquecermeditar);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("ReikiJournal_channel", name, importance);

@@ -4,15 +4,14 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.lua.reikijournal.ui.meditar.MeditarFragment;
 import com.lua.reikijournal.ui.home.HomeFragment;
-import com.lua.reikijournal.ui.backup.BackupFragment;
+import com.lua.reikijournal.ui.settings.SettingsFragment;
+import com.lua.reikijournal.ui.home.NovoReikiFragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,12 +70,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new HomeFragment();
                 getSupportActionBar().setTitle(getString(R.string.diario_de_reiki));
                 break;
-            case R.id.navigation_dashboard:
-                fragment = new MeditarFragment();
-                getSupportActionBar().setTitle(getString(R.string.meditar));
+            case R.id.navigation_newsession:
+                fragment = new NovoReikiFragment();
+                getSupportActionBar().setTitle(getString(R.string.novo));
                 break;
             case R.id.navigation_notifications:
-                fragment = new BackupFragment();
+                fragment = new SettingsFragment();
                 getSupportActionBar().setTitle(getString(R.string.settings));
                 break;
         }

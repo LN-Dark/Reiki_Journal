@@ -7,9 +7,10 @@
         android:title="@string/diario_de_reiki" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/meditation_small"
-        android:title="@string/meditar" />
+        android:id="@+id/navigation_newsession"
+
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/novo" />
 
     <item
         android:id="@+id/navigation_notifications"
